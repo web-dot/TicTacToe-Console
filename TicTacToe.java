@@ -71,7 +71,33 @@ public class TicTacToe{
    
    public boolean checkForWin(){
       //Check for horizontal wins
+      for(int row=0; row<3; row++){
+         if(board[row][0] == currentPlayer && board[row][1] == currentPlayer && board[row][2] == currentPlayer){
+            return true;
+         }
+      }
       
+      //Check for vertical wins
+      for(int col=0; col<3; col++){
+         if(board[0][col] == currentPlayer && board[1][col] == currentPlayer && board[2][col] == currentPlayer){
+            return true;
+         }
+      }
+      
+      //Check for diagonal wins
+      if(board[0][0] == currentPlayer && board[1][1] == currentPlayer && board[2][0] == currentPlayer){
+         return true;
+      }
+      return false;
+   }
+   
+   public void changePlayer(){
+      if(currentPlayer == 'X'){
+         currentPlayer = 'O';
+      }
+      else{
+         currentPlayer = 'X';
+      }    
    }
    
    public static void main(String[] args){
@@ -86,7 +112,7 @@ public class TicTacToe{
          
          if(game.placeMark(row, col)){
             if(game.checkForWin()){
-               System.out.println("Game Over! " + game.currentPlayer + ");
+               System.out.println("Game Over! " + game.currentPlayer + " wins!");
                gameEnded = true;
             }
             else if(game.isBoardFull()){
